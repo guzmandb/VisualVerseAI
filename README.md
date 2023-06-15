@@ -24,7 +24,7 @@ Para MacOS o Unix:
 
 Para Windows
 
-`tutorial-env\Scripts\activate.bat`
+`myenvIA\Scripts\activate.bat`
 
 Luego corra, el siguiente scriptm para ejecutar el programa
 
