@@ -1,15 +1,4 @@
 from flask import Flask, render_template, request
-import PIL
-import tensorflow as tf
-import keras_cv
-import lyricsgenius
-import imageio
-import os
-import pytube
-from keras_cv.models import StableDiffusion
-from PIL import Image
-from moviepy.editor import VideoFileClip, AudioFileClip
-
 
 app = Flask(__name__)
 
@@ -30,6 +19,7 @@ def process():
     from keras_cv.models import StableDiffusion
     from PIL import Image
     from moviepy.editor import VideoFileClip, AudioFileClip
+
     archivo_letra=request.files['archivo_letra']
     archivo_ruta = "./letras/" + archivo_letra.filename
     archivo_letra.save(archivo_ruta)
@@ -65,11 +55,11 @@ def process():
     # Generar una imagen por cada párrafo
     model = StableDiffusion(img_height=512, img_width=512, jit_compile=True)
     for i, paragraph in enumerate(paragraphs):
-        # Generar la imagen a partir del párrafo
+        # Generar la imagen a partir del párrafo, ajuste el numero de steps para calidad
         img = model.text_to_image(
             prompt=paragraph,
             batch_size=1,
-            num_steps=6,
+            num_steps=3,
             seed=123
         )
         # Guardar la imagen con un nombre único
